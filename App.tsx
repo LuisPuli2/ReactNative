@@ -1,22 +1,27 @@
-import React from 'react';
-import { View, Text, Image, ScrollView, TextInput } from 'react-native';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import ImageResult from '@atoms/ImageResult';
+import HomeScreen from '@atoms/HomeScreen';
+import DetailsScreen from '@atoms/DetailsScreen';
 
-export default function App() {
+const Stack = createStackNavigator();
+const StackScreens = () => {
   return (
-    <ScrollView>
-      <Text>Some text</Text>
-      <View>
-        <Text>Some more text</Text>
-        <Image source="https://reactnative.dev/docs/assets/p_cat2.png" style={{width: 200, height: 200}}/>
-      </View>
-      <TextInput
-        style={{
-          height: 40,
-          borderColor: 'gray',
-          borderWidth: 1
-        }}
-        defaultValue="You can type in me"
-      />
-    </ScrollView>
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Details" component={DetailsScreen} />
+      <Stack.Screen name="ImageResult" component={ImageResult} />
+    </Stack.Navigator>
   );
 }
+
+function App() {
+  return (
+    <NavigationContainer>
+      <StackScreens />
+    </NavigationContainer>
+  );
+}
+
+export default App;
